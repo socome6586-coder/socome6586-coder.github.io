@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자주 묻는 질문 · 현장장부</title>
+<style>
+  :root { --blue:#2c74ee; --ink:#16181d; --sub:#5f6672; --line:#e4e7ee; --bg:#f3f5f9; --soft:#eef4fe; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.7 "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+  header { background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:2; }
+  .bar { max-width:760px; margin:0 auto; padding:16px 20px 0; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; color:var(--ink); text-decoration:none; }
+  .brand img { width:30px; height:30px; border-radius:8px; }
+  nav { display:flex; gap:22px; overflow-x:auto; margin-top:12px; }
+  nav a { padding:10px 0 12px; color:var(--sub); text-decoration:none; font-weight:600; white-space:nowrap; border-bottom:3px solid transparent; }
+  nav a.on { color:var(--blue); border-bottom-color:var(--blue); }
+  main { max-width:760px; margin:0 auto; padding:28px 20px 72px; }
+  h1 { font-size:28px; line-height:1.3; margin:0 0 6px; letter-spacing:-0.5px; }
+  .lead { color:var(--sub); margin:0 0 28px; }
+  h2 { font-size:21px; margin:40px 0 12px; letter-spacing:-0.3px; }
+  h3 { font-size:17px; margin:22px 0 6px; }
+  p, li { margin:6px 0; }
+  ul, ol { padding-left:22px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px 22px; margin:12px 0; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:560px) { .grid { grid-template-columns:1fr; } }
+  .plan h3 { margin-top:0; font-size:19px; }
+  .plan.pro { border:2px solid var(--blue); background:var(--soft); }
+  .price { font-size:26px; font-weight:800; margin:4px 0 2px; }
+  .muted { color:var(--sub); font-size:15px; }
+  .blue { color:var(--blue); font-weight:700; }
+  .soon { color:#e8740c; font-weight:700; font-size:14px; }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  th, td { padding:13px 14px; border-top:1px solid var(--line); text-align:left; vertical-align:top; }
+  thead th { border-top:none; background:#fafbfd; color:var(--sub); font-size:14px; }
+  td.c, th.c { text-align:center; white-space:nowrap; }
+  .yes { color:var(--blue); font-weight:800; }
+  .no { color:#a8aeb8; }
+  details { background:#fff; border:1px solid var(--line); border-radius:14px; padding:4px 18px; margin:10px 0; }
+  summary { cursor:pointer; font-weight:700; padding:12px 0; list-style:none; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:"+"; float:right; color:var(--blue); font-weight:800; }
+  details[open] summary::after { content:"−"; }
+  details p, details ul { margin:0 0 12px; color:#2b3038; }
+  .ver { display:flex; align-items:baseline; gap:10px; }
+  .ver b { font-size:20px; }
+  .step { counter-reset:s; list-style:none; padding:0; }
+  .step li { counter-increment:s; position:relative; padding-left:34px; margin:10px 0; }
+  .step li::before { content:counter(s); position:absolute; left:0; top:2px; width:24px; height:24px; border-radius:7px;
+                     background:var(--soft); color:var(--blue); font-weight:800; font-size:14px; text-align:center; line-height:24px; }
+  footer { max-width:760px; margin:0 auto; padding:0 20px 40px; color:var(--sub); font-size:14px; }
+  footer a { color:var(--sub); }
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="brand" href="index.html"><img src="icon.png" alt="">현장장부</a>
+  <nav><a href="guide.html">사용 가이드</a><a href="faq.html" class=on>자주 묻는 질문</a><a href="pricing.html">요금 안내</a><a href="updates.html">업데이트 소식</a></nav>
+</div></header>
+<main>
+<h1>자주 묻는 질문</h1>
+<p class="lead">궁금한 질문을 누르면 답이 펼쳐집니다.</p>
+<details><summary>인터넷이 없어도 쓸 수 있습니까?</summary><p>네. 광고를 제외한 모든 기능이 인터넷 없이 동작합니다. 지하·옥상·기계실에서도 그대로 쓸 수 있습니다.</p></details><details><summary>장부는 어디에 저장됩니까?</summary><p>사용자의 폰 안에만 저장됩니다. 개발자는 장부 내용을 볼 수 없습니다.</p></details><details><summary>폰을 바꾸면 장부를 옮길 수 있습니까?</summary><p>설정 &gt; 백업 / 복원에서 백업 파일을 내보낸 뒤, 새 폰에서 같은 화면의 백업 파일 불러오기를 누르면 됩니다. 공유 창에서 드라이브를 고르면 구글 드라이브에 보관할 수 있습니다.</p></details><details><summary>앱을 지우면 장부도 지워집니까?</summary><p>네. 앱을 지우기 전에 반드시 백업 파일을 내보내 주십시오.</p></details><details><summary>거래처를 등록하면 폰 연락처에 왜 생깁니까?</summary><p>그 번호로 전화가 왔을 때 화면에 거래처 별명이 뜨게 하기 위해서입니다. 개인 연락처와 섞이지 않도록 ‘현장장부’ 계정으로 따로 저장되며, 설정 &gt; 연락처 자동 등록에서 끌 수 있습니다.</p></details><details><summary>앱에서 만든 서류로 세무 신고를 할 수 있습니까?</summary><p>아니요. 앱의 견적서·거래명세서·발주서는 거래 내용을 정리한 서류입니다. 세무 신고에 필요한 증빙 서류는 관련 기관의 절차에 따라 따로 발급해야 합니다.</p></details><details><summary>앱에서 만든 도장은 인감 대신 쓸 수 있습니까?</summary><p>아니요. 서류에 표시하는 도장 그림입니다. 본인 또는 본인 사업체 명의로만 만들어 주십시오.</p></details><details><summary>광고는 언제 나옵니까?</summary><p>무료 플랜에서 서류를 저장한 뒤에 나옵니다. 연달아 저장할 때는 2분에 한 번까지만 나오며, 인터넷이 없으면 광고 없이 그대로 진행됩니다. Pro 에서는 나오지 않습니다.</p></details><details><summary>무료 플랜 한도를 넘으면 어떻게 됩니까?</summary><p>새로 등록하는 것만 막힙니다. 이미 등록한 거래처·재고·문서는 그대로 보고 고칠 수 있습니다.</p></details><details><summary>Pro 구독은 어떻게 해지합니까?</summary><p>Play 스토어 &gt; 프로필 &gt; 결제 및 정기 결제 &gt; 정기 결제에서 현장장부를 해지합니다. 이미 결제한 기간이 끝날 때까지 Pro 를 쓸 수 있습니다.</p></details><details><summary>폰을 바꿨는데 Pro 가 풀렸습니다.</summary><p>새 폰에서 같은 구글 계정으로 로그인한 뒤, 설정 &gt; 현장장부 Pro &gt; <b>구매 내역 복원</b>을 눌러 주십시오.</p></details><details><summary>여러 명이 같은 장부를 쓸 수 있습니까?</summary><p>팀 요금(여럿이 함께 쓰는 장부)을 준비하고 있습니다. 출시되면 업데이트 소식에 알려 드리겠습니다.</p></details><details><summary>문의는 어디로 합니까?</summary><p>설정 &gt; 문의하기, 또는 <a href="mailto:socome6586@gmail.com">socome6586@gmail.com</a> 으로 보내 주십시오.</p></details>
+</main>
+<footer>투민컴퍼니 · <a href="mailto:socome6586@gmail.com">socome6586@gmail.com</a> ·
+<a href="terms.html">이용약관</a> · <a href="privacy-policy.html">개인정보처리방침</a></footer>
+</body>
+</html>
