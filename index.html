@@ -3,51 +3,155 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>현장장부</title>
+<title>현장장부 · 재고·거래명세서·미수금 장부</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  body { margin: 0; background: #f1f2f6; color: #1b1b21;
-         font: 16px/1.7 -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
-  main { max-width: 720px; margin: 0 auto; padding: 48px 20px 64px; background: #fff; }
-  h1 { font-size: 28px; margin: 0 0 4px; }
-  .sub { color: #5a5a6e; margin: 0 0 32px; }
-  h2 { font-size: 19px; margin: 32px 0 8px; }
-  ul { padding-left: 22px; }
-  li { margin: 6px 0; }
-  a { color: #1d5fe0; }
-  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e3e4ea;
-           color: #5a5a6e; font-size: 14px; }
+  :root { --blue:#2c74ee; --blue-d:#1d5fe0; --ink:#191f28; --sub:#6b7684; --mute:#8b95a1;
+          --bg:#f1f2f6; --card:#fff; --soft:#eef4fe; --tint:#f7f8fa; --red:#e0302f; }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.7 "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+         word-break:keep-all; }
+  a { color:var(--blue-d); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .wrap { max-width:760px; margin:0 auto; padding:0 16px; }
+  header { padding:18px 0 6px; }
+  .brand { display:inline-flex; align-items:center; gap:10px; font-weight:800; font-size:19px; color:var(--ink); }
+  .brand:hover { text-decoration:none; }
+  .brand img { width:32px; height:32px; border-radius:9px; }
+  nav { display:flex; gap:6px; margin:14px 0 0; overflow-x:auto; scrollbar-width:none; }
+  nav::-webkit-scrollbar { display:none; }
+  nav a { padding:8px 12px; border-radius:10px; color:var(--sub); font-weight:600; font-size:15px; white-space:nowrap; }
+  nav a:hover { background:#e6e8ee; text-decoration:none; }
+  nav a.on { background:var(--card); color:var(--blue); }
+  main { padding:18px 0 56px; }
+  h1 { font-size:28px; line-height:1.3; margin:8px 0 6px; letter-spacing:-0.6px; }
+  .lead { color:var(--sub); margin:0 0 22px; }
+  h2 { font-size:19px; margin:30px 0 10px; letter-spacing:-0.3px; }
+  h3 { font-size:16px; margin:0 0 4px; }
+  p { margin:6px 0; }
+  ul { margin:6px 0; padding-left:20px; }
+  li { margin:5px 0; }
+  .card { background:var(--card); border-radius:14px; padding:20px; margin:10px 0; }
+  .card > :first-child { margin-top:0; }
+  .card > :last-child { margin-bottom:0; }
+  .muted { color:var(--sub); }
+  .small { font-size:14px; }
+  .blue { color:var(--blue); }
+  b, strong { font-weight:700; }
+  /* 단계 목록: 번호는 둥근 네모 (알약 아님) */
+  .steps { list-style:none; padding:0; margin:0; counter-reset:s; }
+  .steps li { counter-increment:s; position:relative; padding-left:38px; margin:14px 0; }
+  .steps li:first-child { margin-top:0; }
+  .steps li:last-child { margin-bottom:0; }
+  .steps li::before { content:counter(s); position:absolute; left:0; top:1px; width:26px; height:26px;
+                      border-radius:8px; background:var(--soft); color:var(--blue); font-weight:800;
+                      font-size:14px; text-align:center; line-height:26px; }
+  .steps b { display:block; }
+  .item { margin:14px 0; }
+  .item:first-child { margin-top:0; }
+  .item:last-child { margin-bottom:0; }
+  .item b { display:block; }
+  .item span { color:var(--sub); }
+  /* 자주 묻는 질문 */
+  details { background:var(--card); border-radius:14px; margin:8px 0; }
+  summary { cursor:pointer; font-weight:700; padding:16px 48px 16px 20px; list-style:none; position:relative; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:""; position:absolute; right:22px; top:24px; width:8px; height:8px;
+                   border-right:2px solid var(--mute); border-bottom:2px solid var(--mute);
+                   transform:rotate(45deg); transition:transform .15s; }
+  details[open] summary::after { transform:rotate(225deg); top:28px; }
+  details .a { padding:0 20px 18px; color:#333a44; }
+  details .a p { margin:0 0 6px; }
+  /* 요금 */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media (max-width:560px) { .grid { grid-template-columns:1fr; } }
+  .plan { margin:0; }
+  .plan.pro { background:var(--soft); }
+  .plan .name { font-weight:700; color:var(--sub); }
+  .plan.pro .name { color:var(--blue); }
+  .price { font-size:28px; font-weight:800; letter-spacing:-0.6px; margin:2px 0; }
+  .plan ul { padding-left:18px; margin-top:10px; }
+  .compare { width:100%; border-collapse:separate; border-spacing:0 4px; }
+  .compare th, .compare td { padding:10px 12px; text-align:left; font-size:15px; }
+  .compare thead th { color:var(--sub); font-weight:600; font-size:14px; }
+  .compare tbody td { background:var(--tint); }
+  .compare tbody td:first-child { border-radius:10px 0 0 10px; }
+  .compare tbody td:last-child { border-radius:0 10px 10px 0; }
+  .compare .c { text-align:center; white-space:nowrap; }
+  .yes { color:var(--blue); font-weight:800; }
+  .no { color:var(--mute); }
+  /* 업데이트 */
+  .ver { display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .ver b { font-size:19px; }
+  .ver span { color:var(--sub); font-size:14px; }
+  .new { display:inline-block; font-size:12px; font-weight:700; color:var(--blue); background:var(--soft);
+         border-radius:6px; padding:1px 7px; margin-left:4px; vertical-align:2px; }
+  /* 첫 화면 */
+  .hero { text-align:center; padding:26px 8px 8px; }
+  .hero img { width:76px; height:76px; border-radius:20px; }
+  .hero h1 { font-size:32px; margin:14px 0 6px; }
+  .hero p { color:var(--sub); margin:0; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; font-weight:700; padding:13px 22px;
+         border-radius:12px; margin-top:18px; }
+  .btn:hover { background:var(--blue-d); text-decoration:none; }
+  .feats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  @media (max-width:560px) { .feats { grid-template-columns:1fr; } }
+  .feats .card { margin:0; }
+  .links { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .links a { display:block; background:var(--card); border-radius:14px; padding:16px 18px; color:var(--ink); font-weight:600; }
+  .links a:hover { text-decoration:none; background:#fafbfd; }
+  .links a span { display:block; color:var(--sub); font-weight:400; font-size:14px; }
+  /* 법적 문서 */
+  .doc h2 { font-size:18px; margin:28px 0 8px; }
+  .doc h3 { font-size:16px; margin:18px 0 4px; }
+  .doc table { width:100%; border-collapse:separate; border-spacing:0 4px; font-size:14px; }
+  .doc th, .doc td { padding:9px 10px; text-align:left; vertical-align:top; background:var(--tint); }
+  .doc th { background:#eceef3; font-weight:600; }
+  .doc code { background:var(--tint); padding:1px 5px; border-radius:5px; font-size:14px; }
+  .notice { background:#fff6dc; border-radius:12px; padding:12px 14px; margin:10px 0 18px; }
+  footer { padding:0 0 40px; color:var(--sub); font-size:14px; }
+  footer a { color:var(--sub); }
 </style>
 </head>
 <body>
+<div class="wrap">
+<header>
+  <a class="brand" href="index.html"><img src="icon.png" alt="">현장장부</a>
+  <nav><a href="guide.html">가이드</a><a href="faq.html">자주 묻는 질문</a><a href="pricing.html">요금</a><a href="updates.html">업데이트</a></nav>
+</header>
 <main>
+<section class="hero">
+  <img src="icon.png" alt="현장장부">
   <h1>현장장부</h1>
-  <p class="sub">출장 설치·수리 기사를 위한 재고·미수금·서류 장부</p>
+  <p>가게 카운터에서도, 현장에서도 폰 하나로 쓰는<br>재고 · 거래명세서 · 미수금 장부입니다.</p>
+  <a class="btn" href="https://play.google.com/store/apps/details?id=com.hyunjang.ledger">Google Play에서 받기</a>
+  <p class="small" style="margin-top:10px">가입하면 Pro를 2주 동안 무료로 씁니다.</p>
+</section>
 
-  <h2>이런 앱이에요</h2>
-  <ul>
-    <li>바코드를 찍어 재고를 넣고 빼요. 라벨이 없는 제품은 앱에서 뽑아 붙여요.</li>
-    <li>견적서·거래명세서·발주서를 현장에서 만들어 PDF로 보내요.</li>
-    <li>미수금과 수금 이력을 거래처별로 기록해요.</li>
-    <li>거래처를 폰 연락처에 넣어, 전화가 오면 별명이 떠요.</li>
-    <li>처음 로그인만 하면 그 뒤로는 인터넷이 없어도 장부를 씁니다. Pro 는 매일 자동 백업.</li>
-  </ul>
+<h2>이런 일을 합니다</h2>
+<div class="feats">
+  <div class="card"><h3>바코드로 재고 관리</h3><p class="muted">바코드를 찍어 입고·출고합니다. 바코드가 없는 제품은 앱에서 라벨을 뽑아 붙입니다.</p></div>
+  <div class="card"><h3>현장에서 바로 서류</h3><p class="muted">견적서·거래명세서·발주서를 만들어 PDF로 카카오톡·문자로 보냅니다.</p></div>
+  <div class="card"><h3>미수금 놓치지 않기</h3><p class="muted">거래처별로 받을 돈과 일부 수금을 기록하고, 기한이 지나면 홈에서 알려 줍니다.</p></div>
+  <div class="card"><h3>전화 오면 누군지 바로</h3><p class="muted">거래처를 폰 연락처에 넣어 두어, 전화가 오면 거래처 별명이 뜹니다.</p></div>
+  <div class="card"><h3>일정과 달력</h3><p class="muted">며칠 걸리는 일도 달력에 막대로 이어 보이고, 거래처마다 색이 다릅니다.</p></div>
+  <div class="card"><h3>인터넷이 없어도</h3><p class="muted">처음 로그인한 뒤에는 지하·기계실에서도 그대로 씁니다. Pro는 매일 자동 백업합니다.</p></div>
+</div>
 
-  <h2>문서</h2>
-  <ul>
-    <li><a href="guide.html">사용 가이드</a></li>
-    <li><a href="faq.html">자주 묻는 질문</a></li>
-    <li><a href="pricing.html">요금 안내</a></li>
-    <li><a href="updates.html">업데이트 소식</a></li>
-    <li><a href="privacy-policy.html">개인정보처리방침</a></li>
-    <li><a href="terms.html">이용약관</a></li>
-  </ul>
+<h2>안내</h2>
+<div class="links">
+  <a href="guide.html">사용 가이드<span>처음 쓰실 때 필요한 것</span></a>
+  <a href="faq.html">자주 묻는 질문<span>백업, 광고, 구독, 계정</span></a>
+  <a href="pricing.html">요금 안내<span>무료와 Pro 비교</span></a>
+  <a href="updates.html">업데이트 소식<span>새로 생긴 기능</span></a>
+</div>
 
-  <h2>문의</h2>
-  <ul>
-    <li>socome6586@gmail.com</li>
-  </ul>
-
-  <footer>투민컴퍼니</footer>
+<h2>문의</h2>
+<div class="card"><p>앱의 설정 &gt; 문의하기, 또는 <a href="mailto:socome6586@gmail.com">socome6586@gmail.com</a> 으로 보내 주십시오.</p></div>
 </main>
+<footer>투민컴퍼니 · <a href="mailto:socome6586@gmail.com">socome6586@gmail.com</a> · <a href="terms.html">이용약관</a> · <a href="privacy-policy.html">개인정보처리방침</a></footer>
+</div>
 </body>
 </html>

@@ -4,36 +4,137 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>현장장부 개인정보처리방침</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  body { margin: 0; background: #f1f2f6; color: #1b1b21;
-         font: 16px/1.7 -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
-  main { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; background: #fff; }
-  h1 { font-size: 26px; margin: 0 0 8px; }
-  h2 { font-size: 20px; margin: 36px 0 8px; padding-top: 12px; border-top: 1px solid #e3e4ea; }
-  h3 { font-size: 17px; margin: 24px 0 4px; }
-  p, li { margin: 6px 0; }
-  ul, ol { padding-left: 22px; }
-  table { border-collapse: collapse; width: 100%; font-size: 14px; margin: 8px 0; }
-  th, td { border: 1px solid #e3e4ea; padding: 6px 8px; text-align: left; vertical-align: top; }
-  th { background: #f6f7fa; }
-  code { background: #eef0f5; padding: 1px 5px; border-radius: 4px; font-size: 14px; }
-  a { color: #1d5fe0; word-break: break-all; }
+  :root { --blue:#2c74ee; --blue-d:#1d5fe0; --ink:#191f28; --sub:#6b7684; --mute:#8b95a1;
+          --bg:#f1f2f6; --card:#fff; --soft:#eef4fe; --tint:#f7f8fa; --red:#e0302f; }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.7 "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+         word-break:keep-all; }
+  a { color:var(--blue-d); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .wrap { max-width:760px; margin:0 auto; padding:0 16px; }
+  header { padding:18px 0 6px; }
+  .brand { display:inline-flex; align-items:center; gap:10px; font-weight:800; font-size:19px; color:var(--ink); }
+  .brand:hover { text-decoration:none; }
+  .brand img { width:32px; height:32px; border-radius:9px; }
+  nav { display:flex; gap:6px; margin:14px 0 0; overflow-x:auto; scrollbar-width:none; }
+  nav::-webkit-scrollbar { display:none; }
+  nav a { padding:8px 12px; border-radius:10px; color:var(--sub); font-weight:600; font-size:15px; white-space:nowrap; }
+  nav a:hover { background:#e6e8ee; text-decoration:none; }
+  nav a.on { background:var(--card); color:var(--blue); }
+  main { padding:18px 0 56px; }
+  h1 { font-size:28px; line-height:1.3; margin:8px 0 6px; letter-spacing:-0.6px; }
+  .lead { color:var(--sub); margin:0 0 22px; }
+  h2 { font-size:19px; margin:30px 0 10px; letter-spacing:-0.3px; }
+  h3 { font-size:16px; margin:0 0 4px; }
+  p { margin:6px 0; }
+  ul { margin:6px 0; padding-left:20px; }
+  li { margin:5px 0; }
+  .card { background:var(--card); border-radius:14px; padding:20px; margin:10px 0; }
+  .card > :first-child { margin-top:0; }
+  .card > :last-child { margin-bottom:0; }
+  .muted { color:var(--sub); }
+  .small { font-size:14px; }
+  .blue { color:var(--blue); }
+  b, strong { font-weight:700; }
+  /* 단계 목록: 번호는 둥근 네모 (알약 아님) */
+  .steps { list-style:none; padding:0; margin:0; counter-reset:s; }
+  .steps li { counter-increment:s; position:relative; padding-left:38px; margin:14px 0; }
+  .steps li:first-child { margin-top:0; }
+  .steps li:last-child { margin-bottom:0; }
+  .steps li::before { content:counter(s); position:absolute; left:0; top:1px; width:26px; height:26px;
+                      border-radius:8px; background:var(--soft); color:var(--blue); font-weight:800;
+                      font-size:14px; text-align:center; line-height:26px; }
+  .steps b { display:block; }
+  .item { margin:14px 0; }
+  .item:first-child { margin-top:0; }
+  .item:last-child { margin-bottom:0; }
+  .item b { display:block; }
+  .item span { color:var(--sub); }
+  /* 자주 묻는 질문 */
+  details { background:var(--card); border-radius:14px; margin:8px 0; }
+  summary { cursor:pointer; font-weight:700; padding:16px 48px 16px 20px; list-style:none; position:relative; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:""; position:absolute; right:22px; top:24px; width:8px; height:8px;
+                   border-right:2px solid var(--mute); border-bottom:2px solid var(--mute);
+                   transform:rotate(45deg); transition:transform .15s; }
+  details[open] summary::after { transform:rotate(225deg); top:28px; }
+  details .a { padding:0 20px 18px; color:#333a44; }
+  details .a p { margin:0 0 6px; }
+  /* 요금 */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media (max-width:560px) { .grid { grid-template-columns:1fr; } }
+  .plan { margin:0; }
+  .plan.pro { background:var(--soft); }
+  .plan .name { font-weight:700; color:var(--sub); }
+  .plan.pro .name { color:var(--blue); }
+  .price { font-size:28px; font-weight:800; letter-spacing:-0.6px; margin:2px 0; }
+  .plan ul { padding-left:18px; margin-top:10px; }
+  .compare { width:100%; border-collapse:separate; border-spacing:0 4px; }
+  .compare th, .compare td { padding:10px 12px; text-align:left; font-size:15px; }
+  .compare thead th { color:var(--sub); font-weight:600; font-size:14px; }
+  .compare tbody td { background:var(--tint); }
+  .compare tbody td:first-child { border-radius:10px 0 0 10px; }
+  .compare tbody td:last-child { border-radius:0 10px 10px 0; }
+  .compare .c { text-align:center; white-space:nowrap; }
+  .yes { color:var(--blue); font-weight:800; }
+  .no { color:var(--mute); }
+  /* 업데이트 */
+  .ver { display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .ver b { font-size:19px; }
+  .ver span { color:var(--sub); font-size:14px; }
+  .new { display:inline-block; font-size:12px; font-weight:700; color:var(--blue); background:var(--soft);
+         border-radius:6px; padding:1px 7px; margin-left:4px; vertical-align:2px; }
+  /* 첫 화면 */
+  .hero { text-align:center; padding:26px 8px 8px; }
+  .hero img { width:76px; height:76px; border-radius:20px; }
+  .hero h1 { font-size:32px; margin:14px 0 6px; }
+  .hero p { color:var(--sub); margin:0; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; font-weight:700; padding:13px 22px;
+         border-radius:12px; margin-top:18px; }
+  .btn:hover { background:var(--blue-d); text-decoration:none; }
+  .feats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  @media (max-width:560px) { .feats { grid-template-columns:1fr; } }
+  .feats .card { margin:0; }
+  .links { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .links a { display:block; background:var(--card); border-radius:14px; padding:16px 18px; color:var(--ink); font-weight:600; }
+  .links a:hover { text-decoration:none; background:#fafbfd; }
+  .links a span { display:block; color:var(--sub); font-weight:400; font-size:14px; }
+  /* 법적 문서 */
+  .doc h2 { font-size:18px; margin:28px 0 8px; }
+  .doc h3 { font-size:16px; margin:18px 0 4px; }
+  .doc table { width:100%; border-collapse:separate; border-spacing:0 4px; font-size:14px; }
+  .doc th, .doc td { padding:9px 10px; text-align:left; vertical-align:top; background:var(--tint); }
+  .doc th { background:#eceef3; font-weight:600; }
+  .doc code { background:var(--tint); padding:1px 5px; border-radius:5px; font-size:14px; }
+  .notice { background:#fff6dc; border-radius:12px; padding:12px 14px; margin:10px 0 18px; }
+  footer { padding:0 0 40px; color:var(--sub); font-size:14px; }
+  footer a { color:var(--sub); }
 </style>
 </head>
 <body>
+<div class="wrap">
+<header>
+  <a class="brand" href="index.html"><img src="icon.png" alt="">현장장부</a>
+  <nav><a href="guide.html">가이드</a><a href="faq.html">자주 묻는 질문</a><a href="pricing.html">요금</a><a href="updates.html">업데이트</a></nav>
+</header>
 <main>
+<div class="card doc">
 <h1>현장장부 개인정보처리방침</h1>
 <p><strong>시행일: 2026년 10월 15일</strong> (최초 시행 2026년 9월 18일)</p>
-<p style="background:#fff6dc;border:1px solid #f0dc9c;padding:10px 12px;border-radius:6px"><strong>개정 안내</strong> — 카카오·네이버·구글 로그인과 클라우드 백업이 들어가는 업데이트에 맞춰 <strong>2026년 10월 15일</strong>부터 아래 내용이 시행됩니다. 그 전까지는 <a href="privacy-policy-20260929.html">이전 방침(2026년 9월 29일 시행)</a>이 적용됩니다.</p>
+<p class="notice"><strong>개정 안내</strong>: 카카오·네이버·구글 로그인과 클라우드 백업이 들어가는 업데이트에 맞춰 <strong>2026년 10월 15일</strong>부터 아래 내용이 시행됩니다. 그 전까지는 <a href="privacy-policy-20260929.html">이전 방침(2026년 9월 29일 시행)</a>이 적용됩니다.</p>
 
 <h2>1. 요약</h2>
 <p>현장장부의 장부(거래처, 미수금, 재고, 문서, 사진)는 <strong>기본적으로 사용자의 휴대전화 안에 저장</strong>됩니다.
 다만 아래 경우에는 정보가 휴대전화 밖으로 나가며, 모두 이 문서에 적었습니다.</p>
 <ul>
-<li><strong>회원 가입·로그인</strong> — 카카오·네이버·구글 계정으로 가입하면, 회원을 구별하는 데 필요한 최소 정보(이름 또는 별명, 이메일, 계정 식별자)를 저장합니다 (2장)</li>
-<li><strong>클라우드 백업</strong> — Pro 의 자동 백업 또는 사용자가 직접 실행한 클라우드 백업은 장부 백업 파일을 서버에 보관합니다. 본인 계정으로만 열 수 있으며 <strong>개발자는 백업 파일을 열람하지 않습니다</strong> (2장)</li>
-<li><strong>구독</strong> — 결제는 Google Play 가, 구독 상태 확인은 RevenueCat 이 처리합니다 (4장)</li>
-<li><strong>광고·주소 찾기</strong> — Google AdMob, 카카오 우편번호 서비스 (4장)</li>
+<li><strong>회원 가입·로그인</strong>: 카카오·네이버·구글 계정으로 가입하면, 회원을 구별하는 데 필요한 최소 정보(이름 또는 별명, 이메일, 계정 식별자)를 저장합니다 (2장)</li>
+<li><strong>클라우드 백업</strong>: Pro 의 자동 백업 또는 사용자가 직접 실행한 클라우드 백업은 장부 백업 파일을 서버에 보관합니다. 본인 계정으로만 열 수 있으며 <strong>개발자는 백업 파일을 열람하지 않습니다</strong> (2장)</li>
+<li><strong>구독</strong>: 결제는 Google Play 가, 구독 상태 확인은 RevenueCat 이 처리합니다 (4장)</li>
+<li><strong>광고·주소 찾기</strong>: Google AdMob, 카카오 우편번호 서비스 (4장)</li>
 </ul>
 
 <h2>2. 수집하는 개인정보와 이용 목적</h2>
@@ -70,10 +171,10 @@
 <p>앱은 서비스 제공을 위해 아래 업체에 개인정보 처리를 위탁하며, 일부는 국외에서 처리됩니다.</p>
 <table>
 <tr><th>받는 자 (국가)</th><th>항목</th><th>목적</th><th>이전 방법·시기</th><th>보유 기간</th></tr>
-<tr><td>Google LLC — Firebase Authentication·Cloud Functions (미국 등)</td><td>계정 식별자, 이름·별명, 이메일, 로그인 일시</td><td>회원 인증</td><td>로그인할 때 네트워크로 전송</td><td>회원 탈퇴 시까지</td></tr>
-<tr><td>Google LLC — Cloud Storage (대한민국 서울 리전)</td><td>장부 백업 파일</td><td>클라우드 백업·복원</td><td>백업할 때 암호화된 연결로 전송</td><td>회원 탈퇴 시까지</td></tr>
+<tr><td>Google LLC: Firebase Authentication·Cloud Functions (미국 등)</td><td>계정 식별자, 이름·별명, 이메일, 로그인 일시</td><td>회원 인증</td><td>로그인할 때 네트워크로 전송</td><td>회원 탈퇴 시까지</td></tr>
+<tr><td>Google LLC: Cloud Storage (대한민국 서울 리전)</td><td>장부 백업 파일</td><td>클라우드 백업·복원</td><td>백업할 때 암호화된 연결로 전송</td><td>회원 탈퇴 시까지</td></tr>
 <tr><td>RevenueCat, Inc. (미국)</td><td>계정 식별자, 구매 기록, 기기 종류·앱 버전</td><td>구독 상태 확인</td><td>앱 실행·구매·구매 내역 복원 시 전송</td><td>RevenueCat 정책에 따름</td></tr>
-<tr><td>Google LLC — AdMob (미국 등)</td><td>광고 식별자, 기기 정보, IP 주소, 광고 상호작용 정보</td><td>무료 사용자 광고 표시</td><td>광고를 불러올 때 전송</td><td>Google 정책에 따름</td></tr>
+<tr><td>Google LLC: AdMob (미국 등)</td><td>광고 식별자, 기기 정보, IP 주소, 광고 상호작용 정보</td><td>무료 사용자 광고 표시</td><td>광고를 불러올 때 전송</td><td>Google 정책에 따름</td></tr>
 </table>
 <p>카카오·네이버·구글 로그인은 각 회사의 로그인 화면에서 사용자가 직접 동의한 정보만 앱에 전달됩니다. 주소 찾기를 사용하면 입력한 검색어가 카카오 우편번호 서비스로 전송됩니다.</p>
 <ul>
@@ -111,6 +212,9 @@
 
 <h2>10. 방침 변경</h2>
 <p>방침이 바뀌면 시행 7일 전(이용자에게 불리한 변경은 30일 전)에 이 페이지와 앱 업데이트 소식으로 알립니다.</p>
+</div>
 </main>
+<footer>투민컴퍼니 · <a href="mailto:socome6586@gmail.com">socome6586@gmail.com</a> · <a href="terms.html">이용약관</a> · <a href="privacy-policy.html">개인정보처리방침</a></footer>
+</div>
 </body>
 </html>
