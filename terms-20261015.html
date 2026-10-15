@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>현장장부 이용약관</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root { --blue:#2c74ee; --blue-d:#1d5fe0; --ink:#191f28; --sub:#6b7684; --mute:#8b95a1;
+          --bg:#f1f2f6; --card:#fff; --soft:#eef4fe; --tint:#f7f8fa; --red:#e0302f; }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.7 "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+         word-break:keep-all; }
+  a { color:var(--blue-d); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .wrap { max-width:760px; margin:0 auto; padding:0 16px; }
+  header { padding:18px 0 6px; }
+  .brand { display:inline-flex; align-items:center; gap:10px; font-weight:800; font-size:19px; color:var(--ink); }
+  .brand:hover { text-decoration:none; }
+  .brand img { width:32px; height:32px; border-radius:9px; }
+  nav { display:flex; gap:6px; margin:14px 0 0; overflow-x:auto; scrollbar-width:none; }
+  nav::-webkit-scrollbar { display:none; }
+  nav a { padding:8px 12px; border-radius:10px; color:var(--sub); font-weight:600; font-size:15px; white-space:nowrap; }
+  nav a:hover { background:#e6e8ee; text-decoration:none; }
+  nav a.on { background:var(--card); color:var(--blue); }
+  main { padding:18px 0 56px; }
+  h1 { font-size:28px; line-height:1.3; margin:8px 0 6px; letter-spacing:-0.6px; }
+  .lead { color:var(--sub); margin:0 0 22px; }
+  h2 { font-size:19px; margin:30px 0 10px; letter-spacing:-0.3px; }
+  h3 { font-size:16px; margin:0 0 4px; }
+  p { margin:6px 0; }
+  ul { margin:6px 0; padding-left:20px; }
+  li { margin:5px 0; }
+  .card { background:var(--card); border-radius:14px; padding:20px; margin:10px 0; }
+  .card > :first-child { margin-top:0; }
+  .card > :last-child { margin-bottom:0; }
+  .muted { color:var(--sub); }
+  .small { font-size:14px; }
+  .blue { color:var(--blue); }
+  b, strong { font-weight:700; }
+  /* 단계 목록: 번호는 둥근 네모 (알약 아님) */
+  .steps { list-style:none; padding:0; margin:0; counter-reset:s; }
+  .steps li { counter-increment:s; position:relative; padding-left:38px; margin:14px 0; }
+  .steps li:first-child { margin-top:0; }
+  .steps li:last-child { margin-bottom:0; }
+  .steps li::before { content:counter(s); position:absolute; left:0; top:1px; width:26px; height:26px;
+                      border-radius:8px; background:var(--soft); color:var(--blue); font-weight:800;
+                      font-size:14px; text-align:center; line-height:26px; }
+  .steps b { display:block; }
+  .item { margin:14px 0; }
+  .item:first-child { margin-top:0; }
+  .item:last-child { margin-bottom:0; }
+  .item b { display:block; }
+  .item span { color:var(--sub); }
+  /* 자주 묻는 질문 */
+  details { background:var(--card); border-radius:14px; margin:8px 0; }
+  summary { cursor:pointer; font-weight:700; padding:16px 48px 16px 20px; list-style:none; position:relative; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:""; position:absolute; right:22px; top:24px; width:8px; height:8px;
+                   border-right:2px solid var(--mute); border-bottom:2px solid var(--mute);
+                   transform:rotate(45deg); transition:transform .15s; }
+  details[open] summary::after { transform:rotate(225deg); top:28px; }
+  details .a { padding:0 20px 18px; color:#333a44; }
+  details .a p { margin:0 0 6px; }
+  /* 요금 */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media (max-width:560px) { .grid { grid-template-columns:1fr; } }
+  .plan { margin:0; }
+  .plan.pro { background:var(--soft); }
+  .plan .name { font-weight:700; color:var(--sub); }
+  .plan.pro .name { color:var(--blue); }
+  .price { font-size:28px; font-weight:800; letter-spacing:-0.6px; margin:2px 0; }
+  .plan ul { padding-left:18px; margin-top:10px; }
+  .compare { width:100%; border-collapse:separate; border-spacing:0 4px; }
+  .compare th, .compare td { padding:10px 12px; text-align:left; font-size:15px; }
+  .compare thead th { color:var(--sub); font-weight:600; font-size:14px; }
+  .compare tbody td { background:var(--tint); }
+  .compare tbody td:first-child { border-radius:10px 0 0 10px; }
+  .compare tbody td:last-child { border-radius:0 10px 10px 0; }
+  .compare .c { text-align:center; white-space:nowrap; }
+  .yes { color:var(--blue); font-weight:800; }
+  .no { color:var(--mute); }
+  /* 업데이트 */
+  .ver { display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .ver b { font-size:19px; }
+  .ver span { color:var(--sub); font-size:14px; }
+  .new { display:inline-block; font-size:12px; font-weight:700; color:var(--blue); background:var(--soft);
+         border-radius:6px; padding:1px 7px; margin-left:4px; vertical-align:2px; }
+  /* 첫 화면 */
+  .hero { text-align:center; padding:26px 8px 8px; }
+  .hero img { width:76px; height:76px; border-radius:20px; }
+  .hero h1 { font-size:32px; margin:14px 0 6px; }
+  .hero p { color:var(--sub); margin:0; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; font-weight:700; padding:13px 22px;
+         border-radius:12px; margin-top:18px; }
+  .btn:hover { background:var(--blue-d); text-decoration:none; }
+  .feats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  @media (max-width:560px) { .feats { grid-template-columns:1fr; } }
+  .feats .card { margin:0; }
+  .links { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .links a { display:block; background:var(--card); border-radius:14px; padding:16px 18px; color:var(--ink); font-weight:600; }
+  .links a:hover { text-decoration:none; background:#fafbfd; }
+  .links a span { display:block; color:var(--sub); font-weight:400; font-size:14px; }
+  /* 법적 문서 */
+  .doc h2 { font-size:18px; margin:28px 0 8px; }
+  .doc h3 { font-size:16px; margin:18px 0 4px; }
+  .doc table { width:100%; border-collapse:separate; border-spacing:0 4px; font-size:14px; }
+  .doc th, .doc td { padding:9px 10px; text-align:left; vertical-align:top; background:var(--tint); }
+  .doc th { background:#eceef3; font-weight:600; }
+  .doc code { background:var(--tint); padding:1px 5px; border-radius:5px; font-size:14px; }
+  .notice { background:#fff6dc; border-radius:12px; padding:12px 14px; margin:10px 0 18px; }
+  footer { padding:0 0 40px; color:var(--sub); font-size:14px; }
+  footer a { color:var(--sub); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="brand" href="index.html"><img src="icon.png" alt="">현장장부</a>
+  <nav><a href="guide.html">가이드</a><a href="faq.html">자주 묻는 질문</a><a href="pricing.html">요금</a><a href="updates.html">업데이트</a></nav>
+</header>
+<main>
+<div class="card doc">
+<h1>현장장부 이용약관</h1>
+<p><strong>시행일: 2026년 10월 15일</strong> (최초 시행 2026년 9월 29일)</p>
+<p class="notice">이 문서는 2026년 10월 15일부터 2026년 10월 21일까지 적용된 이전 약관입니다. <a href="terms.html">현재 약관 보기</a></p>
+
+<h2>제1조 (목적)</h2>
+<p>이 약관은 투민컴퍼니(이하 “개발자”)가 제공하는 안드로이드 앱 <strong>현장장부</strong>(이하 “앱”)의 이용 조건과 절차, 개발자와 사용자의 권리·의무를 정합니다.</p>
+
+<h2>제2조 (앱이 하는 일)</h2>
+<ol>
+<li>앱은 거래처, 미수금, 자재 재고, 일정, 견적서·거래명세서 등 서류를 사용자의 휴대전화에서 기록하고 관리하는 도구입니다.</li>
+<li>장부는 기본적으로 사용자의 휴대전화에 저장됩니다. 로그인 계정 정보와, 사용자가 클라우드 백업을 하는 경우의 백업 파일은 서버에 보관됩니다. 자세한 내용은 <a href="privacy-policy.html">개인정보처리방침</a>에 적었습니다.</li>
+</ol>
+
+<h2>제2조의2 (회원 가입과 계정)</h2>
+<ol>
+<li>앱은 카카오·네이버·구글 계정으로 가입해 이용합니다. 가입은 만 14세 이상만 할 수 있습니다.</li>
+<li>사용자는 다른 사람의 계정으로 가입하거나 로그인해서는 안 됩니다.</li>
+<li>사용자는 앱 <strong>설정 &gt; 계정 &gt; 계정 삭제</strong>로 언제든 탈퇴할 수 있습니다. 탈퇴하면 계정 정보와 클라우드 백업이 즉시 삭제되며 되돌릴 수 없습니다. 구독 해지는 Google Play 에서 따로 해야 합니다.</li>
+<li>가입하지 않고 <strong>먼저 둘러보기</strong>로 예시 장부를 체험할 수 있습니다. 체험 장부는 앱을 닫거나 체험을 끝내면 사라지며, 체험 중 만든 서류에는 “체험용” 표시가 들어갑니다.</li>
+</ol>
+
+<h2>제3조 (서류)</h2>
+<ol>
+<li>앱이 만드는 견적서·거래명세서·발주서 등은 사용자가 입력한 거래 내용을 보기 좋게 정리한 서류입니다. <strong>법령에 따라 발급해야 하는 세무 증빙 서류가 아니며, 그 서류를 대신하지 않습니다.</strong> 세무 신고에 필요한 서류는 관련 법령과 기관의 절차에 따라 따로 발급해야 합니다.</li>
+<li>서류에 적힌 금액, 수량, 세액, 거래처 정보가 맞는지는 사용자가 확인한 뒤 보내야 합니다.</li>
+</ol>
+
+<h2>제4조 (도장과 로고)</h2>
+<ol>
+<li><strong>도장 만들기</strong>로 만든 도장은 서류에 표시하는 <strong>그림</strong>입니다. 인감이나 등록된 도장과 같은 효력을 갖지 않으며, 인감증명이 필요한 계약·신청 등에는 사용할 수 없습니다.</li>
+<li>사용자는 <strong>본인 또는 본인이 대표하거나 권한을 받은 사업체의 명의로만</strong> 도장을 만들고 사용해야 합니다.</li>
+<li>다른 사람이나 다른 사업체의 이름·상호로 도장을 만들거나, 권한 없이 서류에 사용해서는 안 됩니다. 이를 어겨 생긴 법적 책임은 그 사용자에게 있습니다.</li>
+<li>도장·로고로 사진을 넣는 경우, 사용자는 그 이미지를 쓸 권리가 있어야 합니다.</li>
+</ol>
+
+<h2>제5조 (데이터 보관과 백업)</h2>
+<ol>
+<li>장부는 기본적으로 휴대전화에 저장되므로, 클라우드 백업이나 백업 파일이 없으면 휴대전화 분실·고장·앱 삭제 시 데이터가 사라질 수 있습니다.</li>
+<li>Pro 사용자는 매일 자동 클라우드 백업을 쓸 수 있으며, 계정마다 최근 백업 2개가 보관됩니다. 같은 계정으로 로그인하면 새 휴대전화에서 복원할 수 있습니다.</li>
+<li>개발자는 클라우드 백업 파일의 내용을 열람하지 않습니다.</li>
+</ol>
+
+<h2>제6조 (무료 이용과 광고)</h2>
+<ol>
+<li>앱은 무료로 이용할 수 있으며, 무료 이용에는 등록 개수 등 일부 제한이 있을 수 있습니다. 제한을 넘더라도 이미 입력한 데이터는 계속 보고 고칠 수 있습니다.</li>
+<li>무료 사용자에게는 광고가 표시됩니다. 광고를 불러오지 못하면 광고 없이 그대로 이용할 수 있습니다.</li>
+</ol>
+
+<h2>제7조 (유료 구독: 현장장부 Pro)</h2>
+<ol>
+<li>Pro 구독은 Google Play 결제로 구매하며, 가격과 기간(월간·연간)은 결제 화면에 표시됩니다.</li>
+<li>구독은 기간이 끝나면 같은 조건으로 <strong>자동 갱신</strong>됩니다. 사용자는 Google Play 스토어의 <strong>결제 및 정기 결제</strong> 메뉴에서 언제든 해지할 수 있으며, 해지하면 이미 결제한 기간이 끝날 때까지 Pro를 이용할 수 있습니다.</li>
+<li><strong>가입 후 2주 동안 Pro 를 무료로 이용</strong>할 수 있습니다. 무료 체험은 계정마다 한 번이며, 체험이 끝나도 자동으로 결제되지 않습니다.</li>
+<li>무료 체험 기간이 남아 있을 때 구독하면, 남은 체험 기간만큼 첫 결제 기간이 늘어납니다. (예: 체험 10일이 남은 상태에서 월간 구독 → 약 40일 뒤 다음 결제)</li>
+<li>환불은 Google Play 환불 정책에 따릅니다.</li>
+<li>구독이 끝나도 사용자가 입력한 데이터는 지워지지 않으며, 계속 보고 고칠 수 있습니다.</li>
+</ol>
+
+<h2>제8조 (금지 행위)</h2>
+<p>사용자는 앱을 이용해 문서를 위조·변조하거나, 다른 사람의 명의를 도용하거나, 법령에 어긋나는 목적으로 서류를 만들어서는 안 됩니다.</p>
+
+<h2>제9조 (책임의 한계)</h2>
+<ol>
+<li>개발자는 앱이 정상적으로 동작하도록 노력하지만, 앱이 모든 상황에서 오류 없이 동작한다고 보증하지는 않습니다.</li>
+<li>사용자가 입력한 내용의 정확성, 사용자가 만든 서류와 도장의 사용, 사용자와 거래처 사이의 거래에서 생긴 분쟁에 대해 개발자는 책임을 지지 않습니다. 다만 개발자의 고의 또는 중대한 과실로 생긴 손해는 예외로 합니다.</li>
+</ol>
+
+<h2>제10조 (약관 변경)</h2>
+<p>약관을 바꾸는 경우 시행일과 바뀐 내용을 이 페이지에 공지합니다. 사용자에게 불리한 변경은 시행 7일 전까지 공지합니다.</p>
+
+<h2>제11조 (문의)</h2>
+<ul>
+<li>개발자: 투민컴퍼니 (대표 조민석)</li>
+<li>이메일: socome6586@gmail.com</li>
+</ul>
+</div>
+</main>
+<footer>투민컴퍼니 · <a href="mailto:socome6586@gmail.com">socome6586@gmail.com</a> · <a href="terms.html">이용약관</a> · <a href="privacy-policy.html">개인정보처리방침</a></footer>
+</div>
+</body>
+</html>
