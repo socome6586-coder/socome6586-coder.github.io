@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://socome6586-coder.github.io/sitemap.xml

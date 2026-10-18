@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>견적서 양식 무료 작성·인쇄·PDF 저장 · 현장장부</title>
+<meta name="description" content="견적서 양식을 무료로 작성하고 인쇄·PDF로 저장하세요. 부가세 별도·포함 자동 계산, 회원가입 없이 바로 사용합니다.">
+<link rel="canonical" href="https://socome6586-coder.github.io/quote.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="견적서 양식 무료 작성·인쇄·PDF 저장 · 현장장부">
+<meta property="og:description" content="견적서 양식을 무료로 작성하고 인쇄·PDF로 저장하세요. 부가세 별도·포함 자동 계산, 회원가입 없이 바로 사용합니다.">
+<meta property="og:url" content="https://socome6586-coder.github.io/quote.html">
+<meta property="og:image" content="https://socome6586-coder.github.io/icon.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root { --blue:#2c74ee; --blue-d:#1d5fe0; --ink:#191f28; --sub:#6b7684; --mute:#8b95a1;
+          --bg:#f1f2f6; --card:#fff; --soft:#eef4fe; --tint:#f7f8fa; --red:#e0302f; }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.7 "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+         word-break:keep-all; }
+  a { color:var(--blue-d); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .wrap { max-width:760px; margin:0 auto; padding:0 16px; }
+  header { padding:18px 0 6px; }
+  .brand { display:inline-flex; align-items:center; gap:10px; font-weight:800; font-size:19px; color:var(--ink); }
+  .brand:hover { text-decoration:none; }
+  .brand img { width:32px; height:32px; border-radius:9px; }
+  nav { display:flex; gap:6px; margin:14px 0 0; overflow-x:auto; scrollbar-width:none; }
+  nav::-webkit-scrollbar { display:none; }
+  nav a { padding:8px 12px; border-radius:10px; color:var(--sub); font-weight:600; font-size:15px; white-space:nowrap; }
+  nav a:hover { background:#e6e8ee; text-decoration:none; }
+  nav a.on { background:var(--card); color:var(--blue); }
+  main { padding:18px 0 56px; }
+  h1 { font-size:28px; line-height:1.3; margin:8px 0 6px; letter-spacing:-0.6px; }
+  .lead { color:var(--sub); margin:0 0 22px; }
+  h2 { font-size:19px; margin:30px 0 10px; letter-spacing:-0.3px; }
+  h3 { font-size:16px; margin:0 0 4px; }
+  p { margin:6px 0; }
+  ul { margin:6px 0; padding-left:20px; }
+  li { margin:5px 0; }
+  .card { background:var(--card); border-radius:14px; padding:20px; margin:10px 0; }
+  .card > :first-child { margin-top:0; }
+  .card > :last-child { margin-bottom:0; }
+  .muted { color:var(--sub); }
+  .small { font-size:14px; }
+  .blue { color:var(--blue); }
+  b, strong { font-weight:700; }
+  /* 단계 목록: 번호는 둥근 네모 (알약 아님) */
+  .steps { list-style:none; padding:0; margin:0; counter-reset:s; }
+  .steps li { counter-increment:s; position:relative; padding-left:38px; margin:14px 0; }
+  .steps li:first-child { margin-top:0; }
+  .steps li:last-child { margin-bottom:0; }
+  .steps li::before { content:counter(s); position:absolute; left:0; top:1px; width:26px; height:26px;
+                      border-radius:8px; background:var(--soft); color:var(--blue); font-weight:800;
+                      font-size:14px; text-align:center; line-height:26px; }
+  .steps b { display:block; }
+  .item { margin:14px 0; }
+  .item:first-child { margin-top:0; }
+  .item:last-child { margin-bottom:0; }
+  .item b { display:block; }
+  .item span { color:var(--sub); }
+  /* 자주 묻는 질문 */
+  details { background:var(--card); border-radius:14px; margin:8px 0; }
+  summary { cursor:pointer; font-weight:700; padding:16px 48px 16px 20px; list-style:none; position:relative; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:""; position:absolute; right:22px; top:24px; width:8px; height:8px;
+                   border-right:2px solid var(--mute); border-bottom:2px solid var(--mute);
+                   transform:rotate(45deg); transition:transform .15s; }
+  details[open] summary::after { transform:rotate(225deg); top:28px; }
+  details .a { padding:0 20px 18px; color:#333a44; }
+  details .a p { margin:0 0 6px; }
+  /* 요금 */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media (max-width:560px) { .grid { grid-template-columns:1fr; } }
+  .plan { margin:0; }
+  .plan.pro { background:var(--soft); }
+  .plan .name { font-weight:700; color:var(--sub); }
+  .plan.pro .name { color:var(--blue); }
+  .price { font-size:28px; font-weight:800; letter-spacing:-0.6px; margin:2px 0; }
+  .plan ul { padding-left:18px; margin-top:10px; }
+  .compare { width:100%; border-collapse:separate; border-spacing:0 4px; }
+  .compare th, .compare td { padding:10px 12px; text-align:left; font-size:15px; }
+  .compare thead th { color:var(--sub); font-weight:600; font-size:14px; }
+  .compare tbody td { background:var(--tint); }
+  .compare tbody td:first-child { border-radius:10px 0 0 10px; }
+  .compare tbody td:last-child { border-radius:0 10px 10px 0; }
+  .compare .c { text-align:center; white-space:nowrap; }
+  .yes { color:var(--blue); font-weight:800; }
+  .no { color:var(--mute); }
+  /* 업데이트 */
+  .ver { display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .ver b { font-size:19px; }
+  .ver span { color:var(--sub); font-size:14px; }
+  .new { display:inline-block; font-size:12px; font-weight:700; color:var(--blue); background:var(--soft);
+         border-radius:6px; padding:1px 7px; margin-left:4px; vertical-align:2px; }
+  /* 첫 화면 */
+  .hero { text-align:center; padding:26px 8px 8px; }
+  .hero img { width:76px; height:76px; border-radius:20px; }
+  .hero h1 { font-size:32px; margin:14px 0 6px; }
+  .hero p { color:var(--sub); margin:0; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; font-weight:700; padding:13px 22px;
+         border-radius:12px; margin-top:18px; }
+  .btn:hover { background:var(--blue-d); text-decoration:none; }
+  .feats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  @media (max-width:560px) { .feats { grid-template-columns:1fr; } }
+  .feats .card { margin:0; }
+  .links { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .links a { display:block; background:var(--card); border-radius:14px; padding:16px 18px; color:var(--ink); font-weight:600; }
+  .links a:hover { text-decoration:none; background:#fafbfd; }
+  .links a span { display:block; color:var(--sub); font-weight:400; font-size:14px; }
+  /* 법적 문서 */
+  .doc h2 { font-size:18px; margin:28px 0 8px; }
+  .doc h3 { font-size:16px; margin:18px 0 4px; }
+  .doc table { width:100%; border-collapse:separate; border-spacing:0 4px; font-size:14px; }
+  .doc th, .doc td { padding:9px 10px; text-align:left; vertical-align:top; background:var(--tint); }
+  .doc th { background:#eceef3; font-weight:600; }
+  .doc code { background:var(--tint); padding:1px 5px; border-radius:5px; font-size:14px; }
+  .notice { background:#fff6dc; border-radius:12px; padding:12px 14px; margin:10px 0 18px; }
+  footer { padding:0 0 40px; color:var(--sub); font-size:14px; }
+  footer a { color:var(--sub); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="brand" href="index.html"><img src="icon.png" alt="">현장장부</a>
+  <nav><a href="guide.html">가이드</a><a href="faq.html">자주 묻는 질문</a><a href="pricing.html">요금</a><a href="updates.html">업데이트</a></nav>
+</header>
+<main>
+<style>
+  .form-tools { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 4px; }
+  .form-tools button { font:inherit; font-weight:700; border:0; border-radius:12px; padding:12px 18px; cursor:pointer; }
+  .form-tools .print { background:var(--blue); color:#fff; }
+  .form-tools .clear { background:#e8ebf0; color:var(--ink); }
+  .sheet { background:#fff; border-radius:14px; padding:22px 18px; margin:12px 0 18px; overflow-x:auto; }
+  .sheet h2.doc-title { text-align:center; letter-spacing:12px; font-size:26px; margin:0 0 16px; }
+  .sheet table { width:100%; border-collapse:collapse; font-size:14px; min-width:560px; }
+  .sheet th, .sheet td { border:1px solid #b9c0ca; padding:4px 6px; }
+  .sheet th { background:#f3f5f8; font-weight:600; white-space:nowrap; }
+  .sheet input, .sheet select { width:100%; border:0; font:inherit; background:transparent; padding:4px 2px; }
+  .sheet input:focus { outline:2px solid #cfe0fd; }
+  .sheet .num { text-align:right; }
+  .sheet .parties { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+  .sheet .parties table { min-width:0; }
+  .sheet .sum td { font-weight:700; }
+  .sheet .meta { display:flex; gap:10px; margin-bottom:10px; align-items:center; flex-wrap:wrap; }
+  .sheet .meta label { font-size:14px; color:var(--sub); }
+  .sheet .meta input, .sheet .meta select { width:auto; border-bottom:1px solid #b9c0ca; }
+  @media (max-width:560px) { .sheet .parties { grid-template-columns:1fr; } }
+  .app-cta { background:var(--soft); border-radius:14px; padding:18px; margin:18px 0; }
+  .app-cta h3 { margin:0 0 6px; }
+  @media print {
+    body { background:#fff; }
+    header, footer, nav, .no-print, .form-tools, .app-cta { display:none !important; }
+    .sheet { padding:0; margin:0; border-radius:0; }
+    .sheet input, .sheet select { -webkit-appearance:none; appearance:none; }
+    @page { size:A4; margin:14mm; }
+  }
+</style>
+<h1>견적서 양식 (무료 작성·인쇄·PDF)</h1>
+<p class="lead no-print">아래 칸을 채우면 공급가액·세액·합계가 저절로 계산됩니다. 다 쓰면 "인쇄 · PDF로 저장"을 눌러 종이로 뽑거나 PDF 파일로 저장합니다. 입력한 내용은 이 브라우저 밖으로 보내지 않습니다.</p>
+<div class="form-tools">
+  <button class="print" id="print" type="button">인쇄 · PDF로 저장</button>
+  <button class="clear" id="clear" type="button">모두 지우기</button>
+</div>
+
+<div class="sheet">
+  <h2 class="doc-title">견적서</h2>
+  <div class="meta">
+    <label>작성일 <input id="date" type="date"></label>
+    <label>부가세
+      <select id="vat"><option value="excl">별도</option><option value="incl">포함</option><option value="none">없음</option></select>
+    </label>
+  </div>
+  <div class="parties">
+    <table>
+      <tr><th colspan="2">받는 분</th></tr>
+      <tr><th>상호</th><td><input aria-label="받는 분 상호"></td></tr>
+      <tr><th>담당자</th><td><input aria-label="받는 분 담당자"></td></tr>
+      <tr><th>연락처</th><td><input aria-label="받는 분 연락처"></td></tr>
+    </table>
+    <table>
+      <tr><th colspan="2">공급자</th></tr>
+      <tr><th>상호</th><td><input aria-label="공급자 상호"></td></tr>
+      <tr><th>사업자번호</th><td><input aria-label="사업자등록번호"></td></tr>
+      <tr><th>대표자</th><td><input aria-label="대표자"></td></tr>
+      <tr><th>주소</th><td><input aria-label="주소"></td></tr>
+      <tr><th>연락처</th><td><input aria-label="공급자 연락처"></td></tr>
+    </table>
+  </div>
+  <table>
+    <thead><tr><th>품목</th><th>규격</th><th>수량</th><th>단가</th><th>공급가액</th><th>세액</th><th>비고</th></tr></thead>
+    <tbody>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+<tr class="item"><td><input aria-label="품목"></td><td><input aria-label="규격"></td><td><input class="q num" inputmode="numeric" aria-label="수량"></td><td><input class="p num" inputmode="numeric" aria-label="단가"></td><td><input class="a num" readonly tabindex="-1" aria-label="공급가액"></td><td><input class="t num" readonly tabindex="-1" aria-label="세액"></td><td><input aria-label="비고"></td></tr>
+    </tbody>
+    <tfoot>
+      <tr class="sum"><td colspan="4">공급가액 합계</td><td colspan="3" class="num" id="s-supply">0</td></tr>
+      <tr class="sum"><td colspan="4">세액 합계</td><td colspan="3" class="num" id="s-tax">0</td></tr>
+      <tr class="sum"><td colspan="4">합계 금액</td><td colspan="3" class="num" id="s-total">0</td></tr>
+    </tfoot>
+  </table>
+</div>
+<div class="app-cta">
+  <h3>폰에서 30초 만에 만들고 카카오톡으로 보내기</h3>
+  <p class="muted">현장장부 앱은 거래처와 품목을 저장해 두고, 견적서를 PDF로 만들어 카카오톡·문자로 바로 보냅니다.
+  사업자 도장을 앱에서 만들어 찍고, 보낸 서류는 미수금·재고와 이어집니다. 가입하면 2주 동안 Pro를 무료로 씁니다.</p>
+  <a class="btn" href="https://play.google.com/store/apps/details?id=com.hyunjang.ledger">Google Play에서 현장장부 받기</a>
+</div>
+<div class="no-print">
+<h2>견적서에 꼭 들어가는 것</h2>
+<div class="card"><p>작성일, 받는 분(상호·담당자), 공급자(상호·사업자등록번호·대표자·주소·연락처), 품목·규격·수량·단가, 공급가액과 세액, 합계 금액을 적습니다. 견적 유효기간이나 공사 기간, 결제 조건은 비고에 적어 두면 나중에 다툼이 줄어듭니다.</p></div>
+<h2>자주 묻는 질문</h2>
+<div class="card"><h3>견적서와 거래명세서는 무엇이 다른가요?</h3><p class="muted">견적서는 일을 맡기 전에 예상 금액을 알려 주는 서류이고, 거래명세서는 실제로 물건을 주거나 일을 마친 뒤 주고받은 내용을 적는 서류입니다.</p></div><div class="card"><h3>견적서에 부가세를 포함해야 하나요?</h3><p class="muted">정해진 것은 없지만, 별도인지 포함인지를 분명히 적어야 오해가 없습니다. 위 양식에서 고르면 그대로 계산됩니다.</p></div><div class="card"><h3>견적서를 폰으로 보내려면 어떻게 하나요?</h3><p class="muted">이 페이지에서 PDF로 저장해 보내거나, 현장장부 앱에서 견적서를 만들어 카카오톡·문자로 바로 보낼 수 있습니다.</p></div><div class="card"><h3>견적서에 도장을 찍어야 하나요?</h3><p class="muted">꼭 필요하지는 않지만 신뢰를 더해 줍니다. 현장장부 앱에서는 사업자 도장을 만들어 견적서에 찍을 수 있습니다.</p></div>
+</div>
+
+<script>
+(function () {
+  const won = (n) => (isFinite(n) ? Math.round(n) : 0).toLocaleString('ko-KR');
+  const num = (v) => Number(String(v).replace(/[^0-9.-]/g, '')) || 0;
+  function recalc() {
+    const vat = document.getElementById('vat').value;
+    let supply = 0, tax = 0;
+    document.querySelectorAll('tr.item').forEach((tr) => {
+      const q = num(tr.querySelector('.q').value);
+      const p = num(tr.querySelector('.p').value);
+      let line = q * p, t = 0;
+      if (vat === 'excl') t = Math.round(line * 0.1);
+      if (vat === 'incl') { const base = Math.round(line / 1.1); t = line - base; line = base; }
+      tr.querySelector('.a').value = q && p ? won(line) : '';
+      tr.querySelector('.t').value = q && p && vat !== 'none' ? won(t) : '';
+      supply += q && p ? line : 0; tax += q && p ? t : 0;
+    });
+    document.getElementById('s-supply').textContent = won(supply);
+    document.getElementById('s-tax').textContent = won(tax);
+    document.getElementById('s-total').textContent = won(supply + tax);
+  }
+  document.addEventListener('input', (e) => { if (e.target.closest('.sheet')) recalc(); });
+  document.getElementById('vat').addEventListener('change', recalc);
+  document.getElementById('print').addEventListener('click', () => window.print());
+  document.getElementById('clear').addEventListener('click', () => {
+    document.querySelectorAll('.sheet input').forEach((i) => { if (i.type !== 'date') i.value = ''; });
+    recalc();
+  });
+  const d = document.getElementById('date');
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  if (d && !d.value) d.value = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  recalc();
+})();
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "견적서와 거래명세서는 무엇이 다른가요?", "acceptedAnswer": {"@type": "Answer", "text": "견적서는 일을 맡기 전에 예상 금액을 알려 주는 서류이고, 거래명세서는 실제로 물건을 주거나 일을 마친 뒤 주고받은 내용을 적는 서류입니다."}}, {"@type": "Question", "name": "견적서에 부가세를 포함해야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "정해진 것은 없지만, 별도인지 포함인지를 분명히 적어야 오해가 없습니다. 위 양식에서 고르면 그대로 계산됩니다."}}, {"@type": "Question", "name": "견적서를 폰으로 보내려면 어떻게 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "이 페이지에서 PDF로 저장해 보내거나, 현장장부 앱에서 견적서를 만들어 카카오톡·문자로 바로 보낼 수 있습니다."}}, {"@type": "Question", "name": "견적서에 도장을 찍어야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "꼭 필요하지는 않지만 신뢰를 더해 줍니다. 현장장부 앱에서는 사업자 도장을 만들어 견적서에 찍을 수 있습니다."}}]}</script>
+</main>
+<footer>투민컴퍼니 · <a href="mailto:socome6586@gmail.com">socome6586@gmail.com</a> · <a href="terms.html">이용약관</a> · <a href="privacy-policy.html">개인정보처리방침</a><br>대표 조민석 · 사업자등록번호 186-35-01834 · 부산광역시 부산진구 신천대로 122, 1211호</footer>
+</div>
+</body>
+</html>
